@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TRA — Pipeline OS™ · Decisores B2B em 15 dias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────────────
+       DESIGN TOKENS
+    ───────────────────────────────────────────── */
+    :root {
+      /* Backgrounds */
+      --bg-primary:       #FAFAF8;
+      --bg-secondary:     #F4F4F1;
+      --bg-tertiary:      #EEECEA;
+      --bg-dark:          #0F0F0E;
+      --bg-dark-surface:  #1A1A19;
+
+      /* Text */
+      --text-primary:     #0F0F0E;
+      --text-secondary:   #4A4A47;
+      --text-tertiary:    #8A8A87;
+
+      /* Accent */
+      --accent:           #E8187A;
+      --accent-hover:     #C4156A;
+      --accent-border:    rgba(232,24,122,0.18);
+
+      /* Borders */
+      --border-light:     #E8E8E4;
+      --border-medium:    #D4D4D0;
+      --border-strong:    #B4B4B0;
+
+      /* Section spacing */
+      --section-lg: 120px;
+      --section-md: 96px;
+      --section-sm: 72px;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────────── */
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* ─────────────────────────────────────────────
+       CONTAINERS
+    ───────────────────────────────────────────── */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    .container-narrow {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ─────────────────────────────────────────────
+       TYPOGRAPHY
+    ───────────────────────────────────────────── */
+    .text-hero {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: clamp(48px, 6.5vw, 84px);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    .text-display-lg {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(36px, 4.5vw, 60px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    .text-display-md {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+    }
+    .text-display-sm {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(22px, 2.5vw, 32px);
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+    .text-metric-lg {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1;
+      letter-spacing: -0.025em;
+      color: var(--text-primary);
+    }
+    .text-metric-xl {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+    }
+    .text-metric-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      color: var(--text-tertiary);
+    }
+    .text-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ─────────────────────────────────────────────
+       BUTTONS
+    ───────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+      padding: 15px 28px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(232,24,122,0.28);
+    }
+    .btn-primary:active { transform: translateY(0); box-shadow: none; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-primary);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 15px 24px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border-medium);
+      cursor: pointer;
+      transition: border-color 0.18s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-secondary:hover { border-color: var(--text-primary); }
+    .btn-compact { padding: 10px 20px; font-size: 14px; }
+
+    /* ─────────────────────────────────────────────
+       REVEAL ANIMATION
+    ───────────────────────────────────────────── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s cubic-bezier(0.25,0.1,0.25,1) var(--delay,0s),
+                  transform 0.55s cubic-bezier(0.25,0.1,0.25,1) var(--delay,0s);
+    }
+    [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal] { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION STRUCTURE
+    ───────────────────────────────────────────── */
+    .sec-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+    .sec-header .text-eyebrow { display: block; margin-bottom: 16px; }
+    .sec-header-left { margin-bottom: 48px; }
+    .sec-header-left .text-eyebrow { display: block; margin-bottom: 16px; }
+
+    /* ─────────────────────────────────────────────
+       NAVBAR
+    ───────────────────────────────────────────── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 64px;
+      background: rgba(250,250,248,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+      z-index: 100;
+    }
+    #nav.scrolled { border-bottom-color: var(--border-light); }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .nav-logo-wordmark {
+      font-family: 'Instrument Serif', serif;
+      font-size: 22px;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+    .nav-logo-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 1 — HERO
+    ───────────────────────────────────────────── */
+    #hero {
+      background: var(--bg-primary);
+      padding: 164px 0 100px;
+      text-align: center;
+    }
+    .hero-eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 16px;
+      border: 1px solid var(--border-medium);
+      border-radius: 100px;
+      background: var(--bg-secondary);
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 28px;
+    }
+    .hero-headline { max-width: 780px; margin: 0 auto; }
+    .hero-headline .accent { color: var(--accent); }
+    .hero-negation {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      color: var(--text-tertiary);
+      margin-top: 20px;
+      margin-bottom: 28px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-negation .sep { color: var(--accent); }
+    .hero-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: center;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border-light);
+      margin-bottom: 40px;
+    }
+    .hero-metric-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-metric-sep {
+      width: 1px;
+      height: 40px;
+      background: var(--border-light);
+    }
+    .hero-logo-bar { margin-top: 8px; }
+    .hero-logo-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+    .hero-logo-track {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .hero-logo-track::-webkit-scrollbar { display: none; }
+    .hero-logo-list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      white-space: nowrap;
+      padding: 4px 0;
+    }
+    .hero-logo-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--border-strong);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 2 — MARKET THESES
+    ───────────────────────────────────────────── */
+    #teses {
+      background: var(--bg-secondary);
+      padding: var(--section-lg) 0;
+    }
+    .theses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-light);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .thesis-card {
+      background: var(--bg-primary);
+      padding: 48px 44px;
+      border-top: 2px solid transparent;
+      transition: border-top-color 0.2s ease;
+    }
+    .thesis-card:hover { border-top-color: var(--accent); }
+    .thesis-num {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .thesis-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(20px, 2vw, 26px);
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .thesis-stat {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin: 20px 0 4px;
+    }
+    .thesis-stat.italic { font-style: italic; font-size: clamp(18px, 2vw, 26px); }
+    .thesis-stat.accent-text { color: var(--accent); font-size: clamp(18px, 2vw, 24px); font-style: italic; }
+    .thesis-stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+    .thesis-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 3 — PROBLEM
+    ───────────────────────────────────────────── */
+    #problema {
+      background: var(--bg-primary);
+      padding: var(--section-lg) 0;
+    }
+    .problem-layout {
+      display: grid;
+      grid-template-columns: 43% 57%;
+      gap: 80px;
+      align-items: start;
+    }
+    .problem-left {
+      position: sticky;
+      top: 100px;
+    }
+    .problem-intro {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-top: 24px;
+    }
+    .problem-block {
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .problem-block:first-child { padding-top: 0; }
+    .problem-block-num {
+      font-family: 'Instrument Serif', serif;
+      font-size: 56px;
+      line-height: 1;
+      color: var(--border-light);
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+    .problem-block-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .problem-block-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .problem-block-data {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-primary);
+      margin-top: 16px;
+    }
+    .problem-callout {
+      margin-top: 64px;
+      border-left: 3px solid var(--accent);
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      border-radius: 0 8px 8px 0;
+      padding: 28px 32px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 4 — SOLUTION
+    ───────────────────────────────────────────── */
+    #solucao {
+      background: var(--bg-secondary);
+      padding: var(--section-lg) 0;
+    }
+    .solution-underline {
+      text-decoration: underline;
+      text-decoration-color: var(--accent);
+      text-underline-offset: 4px;
+    }
+    .solution-intro {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-top: 24px;
+    }
+
+    /* Flow diagram */
+    .flow-wrap {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 40px;
+      margin: 56px 0;
+    }
+    .flow-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-tertiary);
+      margin-bottom: 24px;
+    }
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+      gap: 0;
+    }
+    .flow-diagram::-webkit-scrollbar { display: none; }
+    .flow-node {
+      flex-shrink: 0;
+      padding: 10px 12px;
+      min-width: 100px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-medium);
+      border-radius: 6px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      line-height: 1.4;
+      color: var(--text-primary);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .flow-node.highlight {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-border);
+    }
+    .flow-arrow {
+      flex-shrink: 0;
+      width: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--border-strong);
+    }
+
+    /* Benchmark dark box */
+    .benchmark {
+      background: var(--bg-dark);
+      border-radius: 12px;
+      padding: 56px 48px;
+      margin: 48px 0;
+    }
+    .benchmark-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+    .benchmark-item {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+    }
+    .benchmark-item + .benchmark-item::before {
+      content: '→';
+      position: absolute;
+      left: -14px;
+      top: 50%;
+      transform: translateY(-60%);
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      font-size: 28px;
+      color: var(--accent);
+    }
+    .bm-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    .benchmark-footer {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Capability cards */
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border-light);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 56px;
+    }
+    .cap-card {
+      background: var(--bg-primary);
+      padding: 48px 44px;
+      transition: background 0.2s ease;
+    }
+    .cap-card:hover { background: var(--bg-secondary); }
+    .cap-card:last-child { grid-column: 1 / -1; }
+    .cap-num {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 16px;
+    }
+    .cap-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 17px;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .cap-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+    .cap-result {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+    .cap-result::before { content: '→ '; color: var(--accent); }
+
+    /* ─────────────────────────────────────────────
+       SECTION 5 — DIFFERENTIATOR
+    ───────────────────────────────────────────── */
+    #diferenciadores {
+      background: var(--bg-primary);
+      padding: var(--section-lg) 0;
+    }
+
+    /* Comparison table — dark island */
+    .comp-table-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      margin: 48px 0;
+      background: var(--bg-dark);
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+    }
+    .comp-table thead th {
+      padding: 20px 24px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: var(--bg-dark-surface);
+    }
+    .comp-table thead th.col-tra {
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .tra-badge {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 10px;
+      color: var(--accent);
+      margin-top: 2px;
+      letter-spacing: 0.02em;
+    }
+    .comp-table tbody td {
+      padding: 18px 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.35);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .comp-table tbody tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+    .comp-table tbody td:first-child {
+      font-weight: 500;
+      color: rgba(255,255,255,0.6);
+    }
+    .comp-table tbody td.col-tra {
+      background: rgba(232,24,122,0.05);
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+    .comp-table tfoot td {
+      padding: 16px 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: var(--bg-dark);
+      font-style: italic;
+    }
+
+    /* Not-X cards */
+    .notx-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .notx-card {
+      border-left: 3px solid var(--accent);
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      border-radius: 0 8px 8px 0;
+      padding: 32px;
+      transition: background 0.2s ease;
+    }
+    .notx-card:hover { background: var(--bg-tertiary); }
+    .notx-card-no {
+      font-family: 'Instrument Serif', serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+    .notx-card-yes {
+      font-family: 'Instrument Serif', serif;
+      font-size: 20px;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+    .notx-card-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+    .notx-card-data {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+      margin-top: 12px;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 6 — SOCIAL PROOF
+    ───────────────────────────────────────────── */
+    #casos {
+      background: var(--bg-secondary);
+      padding: var(--section-lg) 0;
+    }
+    .proof-agg {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 36px;
+      margin-bottom: 56px;
+    }
+    .proof-agg-item {
+      text-align: center;
+      padding: 0 16px;
+      position: relative;
+    }
+    .proof-agg-item + .proof-agg-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 10%; bottom: 10%;
+      width: 1px;
+      background: var(--border-light);
+    }
+    .tcard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .tcard {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 36px 32px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .tcard:hover {
+      border-color: var(--border-medium);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    .tcard.featured {
+      border: 1.5px solid var(--border-medium);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+    }
+    .tcard.full {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 48px;
+      align-items: flex-start;
+      border: 1.5px solid var(--border-medium);
+    }
+    .tcard-headline {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(17px, 1.8vw, 21px);
+      line-height: 1.3;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+    }
+    .tcard-quote {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      font-style: italic;
+      border-left: 2px solid var(--accent);
+      padding-left: 16px;
+      flex: 1;
+    }
+    .tcard-author {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+    .tcard-author-sep { color: var(--border-medium); }
+    .tcard-full-right { flex-shrink: 0; max-width: 280px; }
+    .proof-logo-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+    .proof-logo-list {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+    .proof-logo-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--border-strong);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 7 — ICP QUALIFIER
+    ───────────────────────────────────────────── */
+    #para-voce {
+      background: var(--bg-primary);
+      padding: var(--section-lg) 0;
+    }
+    .icp-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+    }
+    .icp-col {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 48px 44px;
+    }
+    .icp-col.yes { border-top: 3px solid var(--accent); }
+    .icp-col.no { border-top: 3px solid var(--border-medium); }
+    .icp-col-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--text-primary);
+      margin-bottom: 28px;
+    }
+    .icp-col.no .icp-col-label { color: var(--text-tertiary); }
+    .icp-list { list-style: none; }
+    .icp-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .icp-icon {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .icp-col.yes .icp-icon { color: var(--accent); }
+    .icp-col.no .icp-icon { color: var(--border-strong); }
+    .icp-item-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .icp-col.yes .icp-item-text { color: var(--text-primary); font-weight: 500; }
+    .icp-col.no .icp-item-text { color: var(--text-tertiary); }
+
+    /* ─────────────────────────────────────────────
+       SECTION 8 — FAQ
+    ───────────────────────────────────────────── */
+    #faq {
+      background: var(--bg-secondary);
+      padding: var(--section-lg) 0;
+    }
+    .faq-list {
+      max-width: 720px;
+      margin: 56px auto 0;
+    }
+    .faq-item { border-bottom: 1px solid var(--border-light); }
+    .faq-q {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+      cursor: pointer;
+      text-align: left;
+      background: none;
+      border: none;
+      transition: color 0.15s ease;
+    }
+    .faq-q:hover { color: var(--accent); }
+    .faq-icon {
+      flex-shrink: 0;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--text-tertiary);
+      transition: color 0.2s ease, transform 0.3s ease;
+      line-height: 1;
+    }
+    .faq-item.open .faq-icon {
+      color: var(--accent);
+      transform: rotate(45deg);
+    }
+    .faq-ans {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.open .faq-ans { max-height: 500px; }
+    .faq-ans-inner {
+      padding: 0 0 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 9 — VSL
+    ───────────────────────────────────────────── */
+    #vsl {
+      background: var(--bg-primary);
+      padding: var(--section-lg) 0;
+    }
+    .vsl-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .vsl-header .text-eyebrow { display: block; margin-bottom: 16px; }
+    .vsl-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-top: 16px;
+    }
+    .vsl-player-wrap {
+      max-width: 800px;
+      margin: 0 auto 32px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border-strong);
+      aspect-ratio: 16 / 9;
+      background: var(--bg-dark);
+      position: relative;
+      cursor: pointer;
+    }
+    .vsl-thumb {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.55;
+    }
+    .vsl-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: rgba(15,15,14,0.4);
+    }
+    .vsl-play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .vsl-player-wrap:hover .vsl-play-btn {
+      transform: scale(1.06);
+      box-shadow: 0 0 32px rgba(232,24,122,0.4);
+    }
+    .vsl-play-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.5);
+    }
+    .vsl-caption {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--text-tertiary);
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto 32px;
+      line-height: 1.65;
+    }
+    .vsl-cta { text-align: center; }
+    .vsl-cta-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-top: 12px;
+    }
+
+    /* ─────────────────────────────────────────────
+       SECTION 10 — CTA FINAL (dark)
+    ───────────────────────────────────────────── */
+    #diagnostico {
+      background: var(--bg-dark);
+      padding: var(--section-lg) 0;
+    }
+    .cta-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 56px;
+    }
+    .cta-header .text-eyebrow { display: block; margin-bottom: 16px; }
+    .cta-headline {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(36px, 4.5vw, 60px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+    }
+    .cta-headline em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .cta-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+    .diag-box {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--bg-dark-surface);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 48px 44px;
+    }
+    .diag-box-label {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 28px;
+    }
+    .diag-bullets { margin-bottom: 36px; }
+    .diag-bullet {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .diag-bullet-icon {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .diag-bullet-text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+    .diag-cta-btn {
+      width: 100%;
+      font-size: 16px;
+      padding: 18px 32px;
+      justify-content: center;
+    }
+    .diag-risk {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+    .diag-risk-sep { color: var(--accent); }
+    .diag-secondary-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s ease;
+    }
+    .diag-secondary-link:hover { color: rgba(255,255,255,0.85); }
+
+    /* Cal section — continuous dark */
+    .cal-section {
+      margin-top: 80px;
+      text-align: center;
+    }
+    .cal-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .cal-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: clamp(20px, 2.5vw, 28px);
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+      margin-bottom: 40px;
+    }
+    .cal-title em {
+      font-family: 'Instrument Serif', serif;
+      font-style: italic;
+      color: var(--accent);
+    }
+    .cal-embed-wrap {
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 680px;
+      background: #FFFFFF;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* ─────────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────────── */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 32px 0;
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-row-1 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .footer-logo-mark {
+      font-family: 'Instrument Serif', serif;
+      font-size: 20px;
+      color: #FFFFFF;
+    }
+    .footer-logo-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      transition: color 0.2s ease;
+    }
+    .footer-link:hover { color: rgba(255,255,255,0.7); }
+    .footer-copy {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* ─────────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .theses-grid { grid-template-columns: 1fr; }
+      .benchmark-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .benchmark-item + .benchmark-item::before { display: none; }
+    }
+    @media (max-width: 768px) {
+      :root {
+        --section-lg: 80px;
+        --section-md: 64px;
+        --section-sm: 48px;
+      }
+      .container, .container-narrow { padding: 0 20px; }
+      .nav-inner { padding: 0 20px; }
+      .hero-metrics { grid-template-columns: 1fr; gap: 24px; }
+      .hero-metric-sep { display: none; }
+      .hero-logo-list { justify-content: flex-start; gap: 28px; }
+      .problem-layout { grid-template-columns: 1fr; gap: 40px; }
+      .problem-left { position: static; }
+      .cap-grid { grid-template-columns: 1fr; }
+      .cap-card:last-child { grid-column: auto; }
+      .notx-grid { grid-template-columns: 1fr; }
+      .proof-agg { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .proof-agg-item + .proof-agg-item::before { display: none; }
+      .tcard-grid { grid-template-columns: 1fr; }
+      .tcard.full { flex-direction: column; gap: 24px; }
+      .tcard-full-right { max-width: 100%; }
+      .icp-grid { grid-template-columns: 1fr; }
+      .flow-diagram { flex-direction: column; align-items: center; }
+      .flow-arrow { transform: rotate(90deg); }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .hero-negation { flex-direction: column; gap: 6px; }
+      .footer-row-1 { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .diag-box { padding: 36px 28px; }
+    }
+    @media (max-width: 640px) {
+      #hero { padding-top: 130px; padding-bottom: 80px; }
+      .text-hero { font-size: clamp(40px, 10vw, 60px); }
+      .benchmark { padding: 40px 24px; }
+      .benchmark-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="TRA">
+      <span class="nav-logo-wordmark">TRA</span>
+      <span class="nav-logo-sub">Pipeline OS™</span>
+    </a>
+    <a href="#diagnostico" class="btn-primary btn-compact">Agendar Diagnóstico →</a>
+  </div>
+</nav>
+
+<!-- ── SECTION 1: HERO ── -->
+<section id="hero">
+  <div class="container-narrow">
+
+    <div data-reveal style="--delay:0s; text-align:center; margin-bottom:28px;">
+      <span class="hero-eyebrow-pill">· IA GTM Studio · Signal-Based Acquisition ·</span>
+    </div>
+
+    <div class="hero-headline text-hero" data-reveal style="--delay:0.1s">
+      Decisores B2B na sua agenda em <span class="accent">15 dias</span>.
+    </div>
+
+    <div class="hero-negation" data-reveal style="--delay:0.2s">
+      <span>Sem SDR</span>
+      <span class="sep">·</span>
+      <span>Sem Ads</span>
+      <span class="sep">·</span>
+      <span>Sem depender de indicação.</span>
+    </div>
+
+    <p class="hero-sub" data-reveal style="--delay:0.25s">
+      A TRA constrói sua máquina de aquisição orientada por sinais de intenção no LinkedIn —
+      o canal que seu concorrente ainda não desbloqueou.
+    </p>
+
+    <div class="hero-ctas" data-reveal style="--delay:0.35s">
+      <a href="#diagnostico" class="btn-primary">Diagnosticar Meu Pipeline →</a>
+      <a href="#vsl" class="btn-secondary">▶ Ver a Máquina em Ação</a>
+    </div>
+
+    <div class="hero-metrics" data-reveal style="--delay:0.45s">
+      <div class="hero-metric-item">
+        <span class="text-metric-lg">+40</span>
+        <span class="text-metric-label">empresas B2B</span>
+      </div>
+      <div class="hero-metric-sep"></div>
+      <div class="hero-metric-item">
+        <span class="text-metric-lg">+R$18M</span>
+        <span class="text-metric-label">em pipeline gerado</span>
+      </div>
+      <div class="hero-metric-sep"></div>
+      <div class="hero-metric-item">
+        <span class="text-metric-lg" style="color:var(--accent)">D+15</span>
+        <span class="text-metric-label">go-live garantido</span>
+      </div>
+    </div>
+
+    <div class="hero-logo-bar" data-reveal style="--delay:0.55s">
+      <div class="hero-logo-label">Empresas que já controlam seu pipeline:</div>
+      <div class="hero-logo-track">
+        <div class="hero-logo-list">
+          <span class="hero-logo-name">Otimifica</span>
+          <span class="hero-logo-name">Lyga</span>
+          <span class="hero-logo-name">Opex</span>
+          <span class="hero-logo-name">Facilit'Air</span>
+          <span class="hero-logo-name">Carthagos</span>
+          <span class="hero-logo-name">Flow Digital</span>
+          <span class="hero-logo-name">P3Formar</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 2: MARKET THESES ── -->
+<section id="teses">
+  <div class="container">
+
+    <div class="sec-header" data-reveal>
+      <span class="text-eyebrow">Por que o outbound tradicional falhou com você</span>
+      <h2 class="text-display-md" style="margin-top:16px; max-width:580px; margin-left:auto; margin-right:auto;">
+        O problema não é o canal. É a abordagem.
+      </h2>
+    </div>
+
+    <div class="theses-grid">
+      <div class="thesis-card" data-reveal style="--delay:0s">
+        <div class="thesis-num">01</div>
+        <div class="thesis-title">O Paradoxo do SDR Brasileiro</div>
+        <div class="thesis-stat">R$8k–R$15k</div>
+        <div class="thesis-stat-label">custo médio mensal com encargos</div>
+        <p class="thesis-body">Taxa média de resposta: 2%. Isso não é estratégia. É apostá-la em cara ou coroa todo mês.</p>
+      </div>
+      <div class="thesis-card" data-reveal style="--delay:0.1s">
+        <div class="thesis-num">02</div>
+        <div class="thesis-title">LinkedIn não é rede social.</div>
+        <div class="thesis-stat italic">Banco de dados comportamental</div>
+        <div class="thesis-stat-label">&nbsp;</div>
+        <p class="thesis-body">Decisores deixam sinais de intenção em tempo real: vagas abertas, mudanças de cargo, expansões de time. Quem lê esses sinais fecha. Quem não lê, manda cold message genérica.</p>
+      </div>
+      <div class="thesis-card" data-reveal style="--delay:0.2s">
+        <div class="thesis-num">03</div>
+        <div class="thesis-title">Outbound genérico morreu.</div>
+        <div class="thesis-stat accent-text">Signal-Based Acquisition</div>
+        <div class="thesis-stat-label">&nbsp;</div>
+        <p class="thesis-body">Blast de 1.000 emails para lista comprada é spam com CRM. Outbound real em 2026 começa com inteligência de sinal — você fala com quem está no momento de compra.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 3: PROBLEM ── -->
+<section id="problema">
+  <div class="container">
+
+    <div class="problem-layout">
+      <div class="problem-left" data-reveal>
+        <span class="text-eyebrow" style="display:block; margin-bottom:16px;">O motivo pelo qual seu pipeline está estagnado</span>
+        <h2 class="text-display-lg">
+          Você não tem<br>
+          problema de produto.<br>
+          Você tem problema<br>
+          de controle.
+        </h2>
+        <p class="problem-intro">
+          A maioria das empresas B2B com R$1M–R$50M de faturamento chega no mesmo ponto: oferta validada, cliente satisfeito — e pipeline que não escala de forma previsível.
+        </p>
+      </div>
+
+      <div class="problem-right">
+        <div class="problem-blocks">
+          <div class="problem-block" data-reveal style="--delay:0.05s">
+            <div class="problem-block-num">01</div>
+            <div class="problem-block-title">O SDR que não entrega ROI</div>
+            <p class="problem-block-body">Você contratou (ou está pensando em contratar) um SDR. Três meses de ramp-up. Treinamento. Gestão. Listas compradas. CRM desatualizado.<br><br>Resultado: 3–5 reuniões por mês num bom mês. Turnover alto. Processo frágil.<br><br>É esforço humano disfarçado de sistema. E esforço não escala.</p>
+            <div class="problem-block-data">3–5 reuniões/mês — num bom mês</div>
+          </div>
+          <div class="problem-block" data-reveal style="--delay:0.1s">
+            <div class="problem-block-num">02</div>
+            <div class="problem-block-title">O outbound que vira spam</div>
+            <p class="problem-block-body">Você tentou automação. Sequências de LinkedIn. Cold email em escala. Respostas? 1–2%. Reuniões qualificadas? Quase nenhuma.<br><br>Não porque outbound não funciona — porque estava sendo feito sem inteligência de sinal. Você estava falando com todo mundo. Deveria estar falando com quem está pronto para comprar.</p>
+            <div class="problem-block-data">1–2% de resposta</div>
+          </div>
+          <div class="problem-block" data-reveal style="--delay:0.15s">
+            <div class="problem-block-num">03</div>
+            <div class="problem-block-title">A dependência do founder</div>
+            <p class="problem-block-body">O pipeline que existe hoje depende de você. Das suas indicações. Da sua rede. Do seu tempo.<br><br>E você sabe que não escala. Mas ainda não encontrou o sistema que substitua isso sem perder a qualidade das conversas.</p>
+          </div>
+        </div>
+
+        <div class="problem-callout" data-reveal>
+          O problema não é o canal. Não é o time. Não é o mercado. É que você ainda não tem uma <strong>máquina de aquisição</strong>.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 4: SOLUTION ── -->
+<section id="solucao">
+  <div class="container">
+
+    <div class="sec-header-left" data-reveal>
+      <span class="text-eyebrow">Pipeline OS™ — A Máquina de Aquisição B2B da TRA</span>
+      <h2 class="text-display-lg" style="margin-top:16px; max-width:680px;">
+        Você não vai contratar<br>
+        um serviço. Você vai<br>
+        ligar <span class="solution-underline">uma máquina</span>.
+      </h2>
+      <p class="solution-intro">
+        Pipeline OS™ é a infraestrutura de aquisição B2B que a TRA constrói, opera e otimiza para você. Orientada por sinais de intenção. Alimentada por IA. Visível em tempo real.
+      </p>
+    </div>
+
+    <!-- Flow Diagram -->
+    <div class="flow-wrap" data-reveal>
+      <div class="flow-label">Fluxo Pipeline OS™ — do sinal à reunião</div>
+      <div class="flow-diagram">
+        <div class="flow-node" data-reveal style="--delay:0s">Sinais de<br>Intenção</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" data-reveal style="--delay:0.1s">ICP<br>Cluster</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" data-reveal style="--delay:0.2s">Campanha<br>Personalizada</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" data-reveal style="--delay:0.3s">TAISA™</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" data-reveal style="--delay:0.4s">ORACLE™</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node highlight" data-reveal style="--delay:0.5s">Reunião<br>Qualificada</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" data-reveal style="--delay:0.6s">Pipeline</div>
+      </div>
+    </div>
+
+    <!-- Benchmark dark box -->
+    <div class="benchmark" data-reveal>
+      <div class="benchmark-grid">
+        <div class="benchmark-item">
+          <div class="text-metric-xl">800</div>
+          <div class="bm-label">conexões/mês</div>
+        </div>
+        <div class="benchmark-item">
+          <div class="text-metric-xl">240</div>
+          <div class="bm-label">aceites (30%)</div>
+        </div>
+        <div class="benchmark-item">
+          <div class="text-metric-xl">72</div>
+          <div class="bm-label">respostas qualificadas</div>
+        </div>
+        <div class="benchmark-item">
+          <div class="text-metric-xl" style="color:var(--accent)">7–12</div>
+          <div class="bm-label">reuniões/mês por sender</div>
+        </div>
+      </div>
+      <div class="benchmark-footer">Benchmark por sender · Rastreável no ORACLE™ desde o D+1</div>
+    </div>
+
+    <!-- Capability Cards -->
+    <div class="cap-grid">
+      <div class="cap-card" data-reveal style="--delay:0s">
+        <div class="cap-num">01</div>
+        <div class="cap-title">Arquitetura de ICP Orientada a Sinal</div>
+        <p class="cap-body">Não construímos listas. Construímos clusters de ICP com base em sinais comportamentais reais: vagas abertas, mudanças de cargo, crescimento de time. Nossa infraestrutura rastreia esses sinais em tempo real.</p>
+        <div class="cap-result">Você fala com decisores no momento de compra</div>
+      </div>
+      <div class="cap-card" data-reveal style="--delay:0.08s">
+        <div class="cap-num">02</div>
+        <div class="cap-title">Hiperpersonalização com IA</div>
+        <p class="cap-body">Nossa camada de IA gera abordagens únicas para cada decisor com base no perfil, contexto, sinal de intenção e histórico — sem intervenção manual por mensagem.</p>
+        <div class="cap-result">Taxa de aceite 2–3x acima da média de mercado</div>
+      </div>
+      <div class="cap-card" data-reveal style="--delay:0.16s">
+        <div class="cap-num">03</div>
+        <div class="cap-title">Orquestração de Campanha Multi-touch</div>
+        <p class="cap-body">Cada campanha tem touchpoints calibrados por canal, timing e persona. Conexão → Aquecimento → Abordagem → Follow-up → Handoff para vendas.</p>
+        <div class="cap-result">Consistência sem gestão manual</div>
+      </div>
+      <div class="cap-card" data-reveal style="--delay:0.24s">
+        <div class="cap-num">04</div>
+        <div class="cap-title">TAISA™ — IA de Resposta em Tempo Real</div>
+        <p class="cap-body">TAISA™ monitora respostas em tempo real e propõe a melhor réplica para cada contexto — objeção, interesse, pedido de informação. Tempo de resposta de horas cai para minutos.</p>
+        <div class="cap-result">Zero janelas de oportunidade perdidas por lentidão</div>
+      </div>
+      <div class="cap-card" data-reveal style="--delay:0.32s">
+        <div class="cap-num">05</div>
+        <div class="cap-title">ORACLE™ — Visibilidade Total do Pipeline</div>
+        <p class="cap-body">ORACLE™ consolida métricas de campanha, taxa de aceite, respostas, reuniões agendadas e pipeline gerado numa interface de visibilidade total em tempo real.</p>
+        <div class="cap-result">Você para de operar no escuro</div>
+      </div>
+      <div class="cap-card" data-reveal style="--delay:0.4s">
+        <div class="cap-num">06</div>
+        <div class="cap-title">Monitoramento & Qualificação de Pipeline</div>
+        <p class="cap-body">Time de CS dedicado roda ciclos mensais de otimização: novos clusters de ICP, refinamento de copy, testes de abordagem, expansão de senders. A máquina melhora mês a mês.</p>
+        <div class="cap-result">Conversas viram oportunidades estruturadas</div>
+      </div>
+      <div class="cap-card" data-reveal style="--delay:0.48s">
+        <div class="cap-num">07</div>
+        <div class="cap-title">Ciclos Contínuos de Otimização</div>
+        <p class="cap-body">Pipeline OS™ não é um serviço que você recebe passivamente. É uma infraestrutura de IA e automação que a TRA opera, monitora e evolui continuamente — com ciclos de melhoria que compõem resultado mês a mês. O modelo é SwaS: Software with a Service.</p>
+        <div class="cap-result">Aquisição como ativo de longo prazo — não esforço pontual</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 5: DIFFERENTIATOR ── -->
+<section id="diferenciadores">
+  <div class="container">
+
+    <div class="sec-header-left" data-reveal>
+      <span class="text-eyebrow">Por que não SDR, não agência, não ferramenta</span>
+      <h2 class="text-display-lg" style="margin-top:16px; max-width:640px;">
+        Não é um fornecedor.<br>
+        É a infraestrutura que<br>
+        você opera com a TRA.
+      </h2>
+    </div>
+
+    <!-- Comparison table — dark island -->
+    <div class="comp-table-wrap" data-reveal>
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Critério</th>
+            <th>SDR Interno</th>
+            <th>Agência de Outbound</th>
+            <th class="col-tra">TRA Pipeline OS™<span class="tra-badge">★ Recomendado</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Custo mensal</td>
+            <td>R$8k–R$15k + encargos</td>
+            <td>R$5k–R$20k</td>
+            <td class="col-tra">A partir de R$4.500</td>
+          </tr>
+          <tr>
+            <td>Ramp-up</td>
+            <td>60–90 dias</td>
+            <td>30–60 dias</td>
+            <td class="col-tra">Go-live em 15 dias</td>
+          </tr>
+          <tr>
+            <td>Inteligência de sinal</td>
+            <td>Nenhuma</td>
+            <td>Raramente</td>
+            <td class="col-tra">Central na operação</td>
+          </tr>
+          <tr>
+            <td>Visibilidade em tempo real</td>
+            <td>Depende do CRM</td>
+            <td>Relatório mensal</td>
+            <td class="col-tra">ORACLE™ dashboard</td>
+          </tr>
+          <tr>
+            <td>Personalização</td>
+            <td>Manual e inconsistente</td>
+            <td>Templates genéricos</td>
+            <td class="col-tra">IA por decisor</td>
+          </tr>
+          <tr>
+            <td>Escala</td>
+            <td>Cara e lenta</td>
+            <td>Volume sem qualidade</td>
+            <td class="col-tra">Sender adicional em dias</td>
+          </tr>
+          <tr>
+            <td>Modelo</td>
+            <td>Recurso humano</td>
+            <td>Entrega de output</td>
+            <td class="col-tra">Infraestrutura de IA</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">SDR = esforço humano. Agência = output terceirizado. TRA = infraestrutura que opera e evolui.</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="notx-grid">
+      <div class="notx-card" data-reveal style="--delay:0s">
+        <div class="notx-card-no">Não é cold blast.</div>
+        <div class="notx-card-yes">É signal-based.</div>
+        <p class="notx-card-body">Agências de outbound mandam mensagem para lista. A TRA identifica quem está no momento de compra e aborda no contexto certo. A diferença no resultado não é marginal — é estrutural.</p>
+      </div>
+      <div class="notx-card" data-reveal style="--delay:0.1s">
+        <div class="notx-card-no">Não é ferramenta.</div>
+        <div class="notx-card-yes">É operação completa.</div>
+        <p class="notx-card-body">Você não compra software para operar sozinho. Você recebe a stack + a operação + o time que roda, mede e melhora todo mês. SwaS: Software with a Service.</p>
+      </div>
+      <div class="notx-card" data-reveal style="--delay:0.2s">
+        <div class="notx-card-no">Não terceiriza output.</div>
+        <div class="notx-card-yes">Instala infraestrutura.</div>
+        <p class="notx-card-body">Agência entrega relatório. SDR entrega esforço. A TRA instala uma infraestrutura de IA e automação que opera continuamente — com visibilidade total via ORACLE™ e escala que não depende de contratar mais pessoas.</p>
+      </div>
+      <div class="notx-card" data-reveal style="--delay:0.3s">
+        <div class="notx-card-no">Não é promessa.</div>
+        <div class="notx-card-yes">É sistema verificável.</div>
+        <p class="notx-card-body">Benchmark por sender, rastreável no ORACLE™ desde o primeiro dia. Sem promessa genérica. Com número na mesa.</p>
+        <div class="notx-card-data">800 → 240 → 72 → 7–12</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 6: SOCIAL PROOF ── -->
+<section id="casos">
+  <div class="container">
+
+    <div class="sec-header" data-reveal>
+      <span class="text-eyebrow">Quem já tem a máquina rodando</span>
+      <h2 class="text-display-lg" style="margin-top:16px;">
+        Não são cases de agência.<br>
+        São máquinas em operação.
+      </h2>
+    </div>
+
+    <div class="proof-agg" data-reveal>
+      <div class="proof-agg-item">
+        <div class="text-metric-lg">+40</div>
+        <div class="text-metric-label">empresas B2B</div>
+      </div>
+      <div class="proof-agg-item">
+        <div class="text-metric-lg">+R$18M</div>
+        <div class="text-metric-label">em pipeline gerado</div>
+      </div>
+      <div class="proof-agg-item">
+        <div class="text-metric-lg">120K+</div>
+        <div class="text-metric-label">abordagens</div>
+      </div>
+      <div class="proof-agg-item">
+        <div class="text-metric-lg" style="color:var(--accent)">D+15</div>
+        <div class="text-metric-label">go-live</div>
+      </div>
+    </div>
+
+    <div class="tcard-grid">
+      <div class="tcard featured" data-reveal style="--delay:0s">
+        <div class="tcard-headline">Reuniões com decisores em 7 dias. Máquina rodou enquanto a CEO tirava férias.</div>
+        <div class="tcard-quote">Em 15 dias já conversávamos com decisores que nunca imaginamos acessar. A máquina rodou enquanto eu estava de férias — e as reuniões continuaram chegando.</div>
+        <div class="tcard-author">
+          <span>Ariane Feijó</span>
+          <span class="tcard-author-sep">·</span>
+          <span>CEO</span>
+          <span class="tcard-author-sep">·</span>
+          <span>Otimifica</span>
+        </div>
+      </div>
+      <div class="tcard" data-reveal style="--delay:0.1s">
+        <div class="tcard-headline">Heineken, Reckitt, Tigre, Allianz na agenda. Equivalente a 3 SDRs sem contratar um.</div>
+        <div class="tcard-quote">A TRA nos colocou em frente a decisores de marcas que nunca conseguiríamos acessar via rede. O resultado equivale ao trabalho de 3 SDRs — com previsibilidade que SDR nunca nos deu.</div>
+        <div class="tcard-author">
+          <span>Luciano Albuquerque</span>
+          <span class="tcard-author-sep">·</span>
+          <span>CEO</span>
+          <span class="tcard-author-sep">·</span>
+          <span>Lyga</span>
+        </div>
+      </div>
+      <div class="tcard" data-reveal style="--delay:0.2s">
+        <div class="tcard-headline">Conversas estratégicas com decisores no piloto automático.</div>
+        <div class="tcard-quote">A TRA entregou o que toda empresa B2B precisa e raramente tem: conversas estratégicas com decisores certos, sem forçar venda, no piloto automático.</div>
+        <div class="tcard-author">
+          <span>Giovanni Machado</span>
+          <span class="tcard-author-sep">·</span>
+          <span>CEO</span>
+          <span class="tcard-author-sep">·</span>
+          <span>Opex</span>
+        </div>
+      </div>
+      <div class="tcard" data-reveal style="--delay:0.3s">
+        <div class="tcard-headline">Execução que parece extensão do nosso time — não fornecedor externo.</div>
+        <div class="tcard-quote">A TRA não age como fornecedor. Age como extensão do nosso time — com a mesma exigência e comprometimento que temos internamente.</div>
+        <div class="tcard-author">
+          <span>Jamerson Cunha</span>
+          <span class="tcard-author-sep">·</span>
+          <span>CEO</span>
+          <span class="tcard-author-sep">·</span>
+          <span>Facilit'Air</span>
+        </div>
+      </div>
+      <div class="tcard full" data-reveal style="--delay:0.4s">
+        <div class="tcard-quote" style="font-size:15px;">
+          Antes da TRA, outbound era esperança. Agora é sistema. Pipeline previsível e um mindset completamente diferente sobre como construir crescimento.
+        </div>
+        <div class="tcard-full-right">
+          <div class="tcard-headline" style="margin-bottom:12px; font-size:clamp(16px,1.8vw,20px);">Pipeline previsível. Mindset de outbound transformado.</div>
+          <div class="tcard-author">
+            <span>Leonardo Vieira</span>
+            <span class="tcard-author-sep">·</span>
+            <span>CEO</span>
+            <span class="tcard-author-sep">·</span>
+            <span>Carthagos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal>
+      <div class="proof-logo-label">Entre as empresas implementadas:</div>
+      <div class="proof-logo-list">
+        <span class="proof-logo-name">Otimifica</span>
+        <span class="proof-logo-name">Lyga</span>
+        <span class="proof-logo-name">Opex</span>
+        <span class="proof-logo-name">Facilit'Air</span>
+        <span class="proof-logo-name">Carthagos</span>
+        <span class="proof-logo-name">Flow Digital</span>
+        <span class="proof-logo-name">P3Formar</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 7: ICP QUALIFIER ── -->
+<section id="para-voce">
+  <div class="container">
+
+    <div class="sec-header" data-reveal>
+      <span class="text-eyebrow">Para quem é o Pipeline OS™</span>
+      <h2 class="text-display-md" style="margin-top:16px; max-width:580px; margin-left:auto; margin-right:auto;">
+        Pipeline OS™ foi construído para<br>
+        um perfil específico. Se for o seu,<br>
+        você vai saber.
+      </h2>
+    </div>
+
+    <div class="icp-grid">
+      <div class="icp-col yes" data-reveal style="--delay:0s">
+        <div class="icp-col-label">É para você se:</div>
+        <ul class="icp-list">
+          <li class="icp-item"><span class="icp-icon">✓</span><span class="icp-item-text">Você tem oferta B2B validada e quer escalar</span></li>
+          <li class="icp-item"><span class="icp-icon">✓</span><span class="icp-item-text">Seu ICP está no LinkedIn e toma decisões de compra</span></li>
+          <li class="icp-item"><span class="icp-icon">✓</span><span class="icp-item-text">Você quer pipeline previsível — não mais um canal para "testar"</span></li>
+          <li class="icp-item"><span class="icp-icon">✓</span><span class="icp-item-text">Você acredita que aquisição é sistema, não sorte</span></li>
+          <li class="icp-item"><span class="icp-icon">✓</span><span class="icp-item-text">Você está pronto para ir de "pipeline que depende de mim" para "máquina que funciona"</span></li>
+        </ul>
+      </div>
+      <div class="icp-col no" data-reveal style="--delay:0.15s">
+        <div class="icp-col-label">Não é para você se:</div>
+        <ul class="icp-list">
+          <li class="icp-item"><span class="icp-icon">✗</span><span class="icp-item-text">Você ainda está buscando product-market fit</span></li>
+          <li class="icp-item"><span class="icp-icon">✗</span><span class="icp-item-text">Seu ticket médio está abaixo de R$1.500/mês</span></li>
+          <li class="icp-item"><span class="icp-icon">✗</span><span class="icp-item-text">Você quer volume de contatos sem critério de qualidade</span></li>
+          <li class="icp-item"><span class="icp-icon">✗</span><span class="icp-item-text">Você não está disposto a envolver o time de vendas</span></li>
+          <li class="icp-item"><span class="icp-icon">✗</span><span class="icp-item-text">Você busca serviço de output — não infraestrutura que opera e evolui</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 8: FAQ ── -->
+<section id="faq">
+  <div class="container">
+
+    <div class="sec-header" data-reveal>
+      <span class="text-eyebrow">Perguntas reais. Respostas diretas.</span>
+      <h2 class="text-display-md" style="margin-top:16px; max-width:540px; margin-left:auto; margin-right:auto;">
+        O que founders B2B nos perguntam antes de começar.
+      </h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item open" data-reveal style="--delay:0s">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Em quanto tempo vejo as primeiras reuniões?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">Go-live em 15 dias após onboarding. As primeiras conversas com decisores chegam ainda no primeiro mês de operação — o benchmark dos nossos senders é 7–12 reuniões qualificadas por mês. Não prometemos resultado no dia 1. Prometemos um sistema funcionando na semana 2.</div>
+        </div>
+      </div>
+      <div class="faq-item" data-reveal style="--delay:0.05s">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Como isso é diferente de uma agência de outbound que já contratei?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">Três diferenças estruturais. Primeira: usamos sinais de intenção — abordamos quem está no momento de compra, não quem está na lista. Segunda: você tem visibilidade total via ORACLE™ em tempo real — não depende de relatório mensal da agência. Terceira: você não contrata entrega de output. Você instala infraestrutura de IA que opera continuamente, melhora mês a mês e escala sem contratar mais pessoas. Agência para quando você para de pagar. Infraestrutura evolui.</div>
+        </div>
+      </div>
+      <div class="faq-item" data-reveal style="--delay:0.1s">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Preciso de time de vendas grande para isso funcionar?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">Não. A maioria dos nossos clientes tem 1–3 pessoas no comercial — às vezes o próprio founder. O Pipeline OS™ entrega conversas qualificadas. O que você precisa é de capacidade de fechar, não de time de outbound. O outbound é a máquina. O fechamento é o seu.</div>
+        </div>
+      </div>
+      <div class="faq-item" data-reveal style="--delay:0.15s">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          E se eu não quiser criar dependência da TRA?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">Essa é a objeção mais honesta que recebemos — e faz sentido. A resposta está no modelo.<br><br>Pipeline OS™ não é uma agência que gera output enquanto você espera. É uma infraestrutura de IA e automação que opera com visibilidade total: você vê cada campanha, cada sinal, cada resposta no ORACLE™ em tempo real. Você não depende de relatório. Você não depende de confiança às cegas.<br><br>Você tem controle ativo sobre a máquina — e um time de CS que te reporta o que está funcionando e o que muda. O que você instala é soberania sobre o pipeline.</div>
+        </div>
+      </div>
+      <div class="faq-item" data-reveal style="--delay:0.2s">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Isso funciona para o meu segmento específico?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-ans">
+          <div class="faq-ans-inner">Funciona para qualquer empresa B2B cujo ICP está no LinkedIn e tem ticket relevante. Já implementamos para SaaS, consultorias especializadas, agências B2B, empresas de serviços profissionais, fintechs e mais. O sinal de intenção varia por segmento — mas o método é o mesmo. No diagnóstico gratuito, mapeamos especificamente o seu caso.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 9: VSL ── -->
+<section id="vsl">
+  <div class="container">
+
+    <div class="vsl-header" data-reveal>
+      <span class="text-eyebrow">Ver antes de decidir</span>
+      <h2 class="text-display-md" style="margin-top:16px;">Como a máquina funciona na prática.</h2>
+      <p class="vsl-sub">8 minutos. Sem pitch. Com demonstração real.</p>
+    </div>
+
+    <div class="vsl-player-wrap" data-reveal style="--delay:0.1s">
+      <img class="vsl-thumb" src="brand_assets/TRA Social Media.jpeg" alt="TRA Pipeline OS — Demonstração" loading="lazy">
+      <div class="vsl-play-overlay">
+        <div class="vsl-play-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="6,3 20,12 6,21"/></svg>
+        </div>
+        <div class="vsl-play-label">Pipeline OS™ — Demonstração Real</div>
+      </div>
+    </div>
+
+    <p class="vsl-caption" data-reveal style="--delay:0.15s">
+      Uma visão completa de como a máquina de aquisição funciona — do sinal de intenção à reunião qualificada.
+    </p>
+
+    <div class="vsl-cta" data-reveal style="--delay:0.2s">
+      <a href="#diagnostico" class="btn-primary">Agendar Diagnóstico Gratuito →</a>
+      <div class="vsl-cta-label">Baseado no que você acabou de ver.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SECTION 10: CTA FINAL ── -->
+<section id="diagnostico">
+  <div class="container">
+
+    <div class="cta-header" data-reveal>
+      <span class="text-eyebrow">O próximo passo</span>
+      <h2 class="cta-headline">
+        Se você quer previsibilidade,<br>
+        a decisão é simples:<br>
+        <em>começar.</em>
+      </h2>
+      <p class="cta-sub">Pipeline não é sorte. É sistema. E sistema se constrói — não se espera.</p>
+    </div>
+
+    <div class="diag-box" data-reveal style="--delay:0.15s">
+      <div class="diag-box-label">O que você recebe no diagnóstico gratuito:</div>
+      <div class="diag-bullets">
+        <div class="diag-bullet">
+          <span class="diag-bullet-icon">✓</span>
+          <span class="diag-bullet-text">Análise do seu funil de aquisição atual — onde está vazando</span>
+        </div>
+        <div class="diag-bullet">
+          <span class="diag-bullet-icon">✓</span>
+          <span class="diag-bullet-text">Benchmark comparativo: sua operação vs. TRA Pipeline OS™</span>
+        </div>
+        <div class="diag-bullet">
+          <span class="diag-bullet-icon">✓</span>
+          <span class="diag-bullet-text">Mapa de sinais de intenção do seu ICP no LinkedIn (identificamos ao vivo)</span>
+        </div>
+        <div class="diag-bullet">
+          <span class="diag-bullet-icon">✓</span>
+          <span class="diag-bullet-text">Arquitetura de máquina recomendada para o seu caso específico</span>
+        </div>
+      </div>
+      <a href="#cal-booking" class="btn-primary diag-cta-btn">Agendar Meu Diagnóstico Gratuito →</a>
+      <div class="diag-risk">
+        <span>Diagnóstico gratuito</span>
+        <span class="diag-risk-sep">·</span>
+        <span>Sem compromisso</span>
+        <span class="diag-risk-sep">·</span>
+        <span>Go-live em 15 dias</span>
+      </div>
+      <a href="#faq" class="diag-secondary-link">Ainda tem dúvidas? Falar com um GTM Engineer →</a>
+    </div>
+
+    <!-- Cal.com booking — continuous dark -->
+    <div class="cal-section" id="cal-booking" data-reveal style="--delay:0.25s">
+      <span class="cal-eyebrow">AGENDAR AGORA</span>
+      <div class="cal-title">Escolha o melhor horário para o seu <em>Diagnóstico Gratuito</em></div>
+      <div class="cal-embed-wrap">
+        <div style="width:100%;min-height:680px;" id="my-cal-inline-papo-com-tra"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-row-1">
+      <div class="footer-logo">
+        <span class="footer-logo-mark">TRA</span>
+        <span class="footer-logo-sub">Pipeline OS™</span>
+      </div>
+      <a href="https://tracquisition.com" class="footer-link" target="_blank" rel="noopener">tracquisition.com</a>
+    </div>
+    <div class="footer-copy">© 2026 TRA — The Revenue Architects · Technology for Revenue Acquisition</div>
+  </div>
+</footer>
+
+<!-- ── SCRIPTS ── -->
+<script>
+  /* Navbar scroll border */
+  (function () {
+    var nav = document.getElementById('nav');
+    if (!nav) return;
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+  })();
+
+  /* FAQ accordion */
+  function toggleFaq(btn) {
+    var item = btn.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function (el) {
+      el.classList.remove('open');
+    });
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* Scroll reveal */
+  (function () {
+    var vh = window.innerHeight;
+
+    function revealInView() {
+      document.querySelectorAll('[data-reveal]:not(.is-visible)').forEach(function (el) {
+        if (el.getBoundingClientRect().top < vh * 0.93) {
+          el.classList.add('is-visible');
+        }
+      });
+    }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+    }
+
+    revealInView();
+    document.addEventListener('DOMContentLoaded', revealInView);
+    window.addEventListener('load', revealInView);
+    window.addEventListener('scroll', revealInView, { passive: true });
+  })();
+</script>
+
+<!-- Cal inline embed code begins -->
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "papo-com-tra", {origin:"https://app.cal.com"});
+
+  Cal.ns["papo-com-tra"]("inline", {
+    elementOrSelector:"#my-cal-inline-papo-com-tra",
+    config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true"},
+    calLink: "thiago-avelino-tra/papo-com-tra",
+  });
+
+  Cal.ns["papo-com-tra"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+</script>
+<!-- Cal inline embed code ends -->
+
+</body>
+</html>
