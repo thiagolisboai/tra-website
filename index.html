@@ -1658,6 +1658,108 @@
       .benchmark { padding: 40px 24px; }
       .benchmark-grid { grid-template-columns: 1fr 1fr; }
     }
+
+    /* ─────────────────────────────────────────────
+       SECTION: TRA NEWS NEWSLETTER
+    ───────────────────────────────────────────── */
+    #tra-news {
+      background: var(--bg-dark);
+      padding: 80px 0;
+    }
+    .news-inner {
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+    }
+    .news-content {
+      flex-basis: 55%;
+      flex-shrink: 0;
+    }
+    .news-cards {
+      flex-basis: 40%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .news-eyebrow {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .news-headline {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(26px, 3vw, 36px);
+      line-height: 1.15;
+      color: #FFFFFF;
+      max-width: 520px;
+    }
+    .news-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      max-width: 460px;
+      margin-top: 16px;
+    }
+    .news-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 28px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-top: 28px;
+      transition: opacity 0.15s ease;
+      cursor: pointer;
+    }
+    .news-cta:hover { opacity: 0.88; }
+    .news-micro {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.28);
+      margin-top: 10px;
+    }
+    .news-card {
+      background: var(--bg-dark-surface);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 14px 18px;
+    }
+    .news-card-num {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin-bottom: 4px;
+    }
+    .news-card-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+    @media (max-width: 1023px) {
+      .news-inner { flex-direction: column; gap: 40px; }
+      .news-content { flex-basis: auto; }
+      .news-cards { flex-basis: auto; flex-direction: row; }
+      .news-card { flex: 1; }
+    }
+    @media (max-width: 767px) {
+      #tra-news { padding: 48px 0; }
+      .news-cards { flex-direction: column; }
+      .news-cta { width: 100%; text-align: center; box-sizing: border-box; }
+    }
   </style>
 </head>
 <body>
@@ -2301,6 +2403,50 @@
       </div>
     </div>
 
+  </div>
+</section>
+
+<!-- ── SECTION: TRA NEWS ── -->
+<section id="tra-news" aria-label="Newsletter TRA News">
+  <div class="container">
+    <div class="news-inner">
+
+      <div class="news-content">
+        <span class="news-eyebrow" data-reveal>Toda semana no seu inbox</span>
+        <h2 class="news-headline" data-reveal style="--delay:80ms">
+          O que +3k founders B2B leem para não ficar preso na Onda 2 enquanto os outros já dominaram a Onda 5.
+        </h2>
+        <p class="news-sub" data-reveal style="--delay:160ms">
+          A TRA News traz bastidores técnicos de campanhas reais, operações de AI Sales em funcionamento e estratégias de GTM sem buzzword, sem achismo.
+        </p>
+        <a
+          href="https://news.tracquisition.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Assinar a TRA News — abre em nova aba"
+          class="news-cta"
+          data-reveal
+          style="--delay:240ms"
+        >Receber toda semana →</a>
+        <span class="news-micro" data-reveal style="--delay:280ms">Sem spam. Cancele quando quiser.</span>
+      </div>
+
+      <div class="news-cards">
+        <div class="news-card" data-reveal style="--delay:80ms">
+          <span class="news-card-num">#E29</span>
+          <span class="news-card-title">A Nova Arquitetura do Outbound B2B em 2026. E você escolheu o modelo errado.</span>
+        </div>
+        <div class="news-card" data-reveal style="--delay:160ms">
+          <span class="news-card-num">#E28</span>
+          <span class="news-card-title">As 5 Ondas do Outbound. Você está preso na Onda 2 enquanto vencedores já dominaram a Onda 5.</span>
+        </div>
+        <div class="news-card" data-reveal style="--delay:240ms">
+          <span class="news-card-num">#E27</span>
+          <span class="news-card-title">Outbound Evergreen: A campanha que nunca morre (Enquanto a sua apodrece em 30 dias).</span>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
