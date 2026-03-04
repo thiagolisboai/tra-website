@@ -215,41 +215,147 @@
     #nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      height: 64px;
-      background: rgba(250,250,248,0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.3s ease;
       z-index: 100;
+      display: flex;
+      justify-content: center;
+      padding: 0 24px;
+      pointer-events: none;
+      transition: top 0.35s cubic-bezier(0.25,0.1,0.25,1);
     }
-    #nav.scrolled { border-bottom-color: var(--border-light); }
+    #nav.scrolled { top: 12px; }
     .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 32px;
-      height: 100%;
+      pointer-events: all;
+      width: 100%;
+      max-width: 1024px;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      background: rgba(250,250,248,0);
+      transition:
+        max-width 0.35s cubic-bezier(0.25,0.1,0.25,1),
+        height 0.35s cubic-bezier(0.25,0.1,0.25,1),
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease,
+        padding 0.35s ease;
+    }
+    #nav.scrolled .nav-inner {
+      max-width: 880px;
+      height: 52px;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: var(--border-light);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+      padding: 0 16px;
     }
     .nav-logo {
       display: flex;
-      align-items: baseline;
-      gap: 10px;
+      align-items: center;
+      flex-shrink: 0;
     }
-    .nav-logo-wordmark {
-      font-family: 'Instrument Serif', serif;
-      font-size: 22px;
-      color: var(--text-primary);
-      letter-spacing: -0.01em;
+    .nav-logo-img {
+      height: 28px;
+      width: auto;
+      display: block;
     }
-    .nav-logo-sub {
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .nav-link {
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
       font-weight: 500;
-      color: var(--text-tertiary);
-      letter-spacing: 0.04em;
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: color 0.18s ease, background 0.18s ease;
+      text-decoration: none;
+    }
+    .nav-link:hover { color: var(--text-primary); background: rgba(15,15,14,0.05); }
+    .nav-ham {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4.5px;
+      width: 38px; height: 38px;
+      border: 1px solid var(--border-medium);
+      border-radius: 8px;
+      background: transparent;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .nav-ham:hover { border-color: var(--text-secondary); }
+    .ham-bar {
+      display: block;
+      width: 16px; height: 1.5px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.2s ease;
+    }
+    .nav-ham.open .ham-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-ham.open .ham-bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-ham.open .ham-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    /* Mobile menu overlay */
+    #navMobile {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 99;
+      background: rgba(250,250,248,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 90px 28px 48px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.22s ease, visibility 0.22s ease;
+    }
+    #navMobile.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+    .nav-mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .nav-mobile-link {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      color: var(--text-primary);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-light);
+      display: block;
+      transition: color 0.18s ease;
+      text-decoration: none;
+    }
+    .nav-mobile-link:hover { color: var(--accent); }
+    .nav-mobile-cta { width: 100%; justify-content: center; }
+    /* Responsive */
+    @media (max-width: 768px) {
+      #nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-ham { display: flex; }
     }
 
     /* ─────────────────────────────────────────────
@@ -257,8 +363,128 @@
     ───────────────────────────────────────────── */
     #hero {
       background: var(--bg-primary);
-      padding: 164px 0 100px;
+      padding: 108px 0 100px;
       text-align: center;
+      position: relative;
+      isolation: isolate;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(15,15,14,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,15,14,0.045) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 90%);
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 90%);
+      pointer-events: none;
+    }
+    /* Facepile */
+    .facepile {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .facepile-avatars {
+      display: flex;
+      align-items: center;
+    }
+    .facepile-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2.5px solid var(--bg-primary);
+      overflow: hidden;
+      margin-left: -11px;
+      flex-shrink: 0;
+      background: var(--bg-secondary);
+    }
+    .facepile-avatar:first-child { margin-left: 0; }
+    .facepile-avatar img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Testimonial author badge */
+    .tcard-author-badge {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1.5px solid var(--border-light);
+      background: var(--bg-secondary);
+    }
+    .tcard-author-badge img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .tcard-author { gap: 8px; }
+    .facepile-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1px;
+    }
+    .facepile-count {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .facepile-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      line-height: 1.2;
+    }
+    /* Scroll-to-top button */
+    #scrollTop {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 200;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease, background 0.18s ease;
+    }
+    #scrollTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+    #scrollTop:hover { background: var(--accent); }
+    /* WhatsApp button */
+    #whatsappBtn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 200;
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(232,24,122,0.35);
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    #whatsappBtn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(232,24,122,0.45);
     }
     .hero-eyebrow-pill {
       display: inline-flex;
@@ -501,6 +727,40 @@
     #solucao {
       background: var(--bg-secondary);
       padding: var(--section-lg) 0;
+      position: relative;
+      isolation: isolate;
+    }
+    #solucao::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(15,15,14,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15,15,14,0.04) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 55%);
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .solucao-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: flex-end;
+      gap: 48px;
+      margin-bottom: 72px;
+    }
+    .solucao-hero-text .text-eyebrow { display: block; margin-bottom: 16px; }
+    .solucao-davi-img {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+    }
+    @media (max-width: 768px) {
+      .solucao-hero { grid-template-columns: 1fr; gap: 32px; }
+      .solucao-davi-img { max-width: 280px; margin: 0 auto; }
     }
     .solution-underline {
       text-decoration: underline;
@@ -512,7 +772,7 @@
       font-size: 18px;
       line-height: 1.7;
       color: var(--text-secondary);
-      max-width: 600px;
+      max-width: 560px;
       margin-top: 24px;
     }
 
@@ -784,6 +1044,95 @@
       font-size: 13px;
       color: var(--text-primary);
       margin-top: 12px;
+    }
+
+    /* ─────────────────────────────────────────────
+       SCROLLING TESTIMONIALS COLUMNS
+    ───────────────────────────────────────────── */
+    @keyframes tscroll {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-50%); }
+    }
+    .tscroll-outer {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      max-height: 700px;
+      overflow: hidden;
+      mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+      margin-top: 56px;
+      margin-bottom: 56px;
+    }
+    .tscroll-col {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      max-width: 340px;
+      min-width: 0;
+    }
+    .tscroll-col-2 { display: none; }
+    .tscroll-col-3 { display: none; }
+    @media (min-width: 768px)  { .tscroll-col-2 { display: flex; } }
+    @media (min-width: 1024px) { .tscroll-col-3 { display: flex; } }
+    .tscroll-track {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 20px;
+      animation: tscroll linear infinite;
+      will-change: transform;
+    }
+    .tscroll-card {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      padding: 32px 28px;
+      box-shadow: 0 4px 24px rgba(232,24,122,0.05), 0 1px 4px rgba(0,0,0,0.04);
+      flex-shrink: 0;
+    }
+    .tscroll-stars {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 14px;
+      color: var(--accent);
+      font-size: 14px;
+    }
+    .tscroll-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+    .tscroll-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .tscroll-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1.5px solid var(--border-light);
+      background: var(--bg-secondary);
+    }
+    .tscroll-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .tscroll-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .tscroll-role {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--text-tertiary);
+      line-height: 1.4;
+      margin-top: 1px;
     }
 
     /* ─────────────────────────────────────────────
@@ -1241,19 +1590,16 @@
     }
     .footer-logo {
       display: flex;
-      align-items: baseline;
-      gap: 10px;
+      align-items: center;
     }
-    .footer-logo-mark {
-      font-family: 'Instrument Serif', serif;
-      font-size: 20px;
-      color: #FFFFFF;
+    .footer-logo-img {
+      height: 20px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+      opacity: 0.55;
     }
-    .footer-logo-sub {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      color: rgba(255,255,255,0.35);
-    }
+    .footer-logo-img:hover { opacity: 0.9; transition: opacity 0.2s ease; }
     .footer-link {
       font-family: 'Inter', sans-serif;
       font-size: 13px;
@@ -1317,26 +1663,65 @@
 <body>
 
 <!-- ── NAVBAR ── -->
-<nav id="nav">
+<header id="nav">
   <div class="nav-inner">
     <a href="#" class="nav-logo" aria-label="TRA">
-      <span class="nav-logo-wordmark">TRA</span>
-      <span class="nav-logo-sub">Pipeline OS™</span>
+      <img src="brand_assets/TRA Logo.png" alt="TRA" class="nav-logo-img">
     </a>
-    <a href="#diagnostico" class="btn-primary btn-compact">Agendar Diagnóstico →</a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#solucao" class="nav-link">Solução</a>
+        <a href="#casos" class="nav-link">Resultados</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="https://blog.tracquisition.com/" class="nav-link" target="_blank" rel="noopener">Blog</a>
+      </nav>
+      <a href="#diagnostico" class="btn-primary btn-compact nav-cta">Agendar Diagnóstico</a>
+      <button class="nav-ham" id="navHam" aria-label="Abrir menu" aria-expanded="false">
+        <span class="ham-bar"></span>
+        <span class="ham-bar"></span>
+        <span class="ham-bar"></span>
+      </button>
+    </div>
   </div>
-</nav>
+</header>
+
+<!-- Mobile menu overlay -->
+<div id="navMobile" aria-hidden="true">
+  <div class="nav-mobile-links">
+    <a href="#solucao" class="nav-mobile-link">Solução</a>
+    <a href="#casos" class="nav-mobile-link">Resultados</a>
+    <a href="#faq" class="nav-mobile-link">FAQ</a>
+    <a href="https://blog.tracquisition.com/" class="nav-mobile-link" target="_blank" rel="noopener">Blog</a>
+  </div>
+  <a href="#diagnostico" class="btn-primary nav-mobile-cta">Agendar Diagnóstico →</a>
+</div>
 
 <!-- ── SECTION 1: HERO ── -->
 <section id="hero">
   <div class="container-narrow">
 
-    <div data-reveal style="--delay:0s; text-align:center; margin-bottom:28px;">
-      <span class="hero-eyebrow-pill">· IA GTM Studio · Signal-Based Acquisition ·</span>
+    <div data-reveal style="--delay:0s; text-align:center;">
+      <div class="facepile" style="justify-content:center;">
+        <div class="facepile-avatars">
+          <div class="facepile-avatar"><img src="https://i.pravatar.cc/72?img=49" alt="Cliente TRA" loading="lazy"></div>
+          <div class="facepile-avatar"><img src="https://i.pravatar.cc/72?img=32" alt="Cliente TRA" loading="lazy"></div>
+          <div class="facepile-avatar"><img src="https://i.pravatar.cc/72?img=56" alt="Cliente TRA" loading="lazy"></div>
+          <div class="facepile-avatar"><img src="https://i.pravatar.cc/72?img=12" alt="Cliente TRA" loading="lazy"></div>
+          <div class="facepile-avatar"><img src="https://i.pravatar.cc/72?img=1" alt="Cliente TRA" loading="lazy"></div>
+        </div>
+        <div class="facepile-text">
+          <span class="facepile-count">+40 empresas B2B</span>
+          <span class="facepile-sub">já controlam seu pipeline</span>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal style="--delay:0.05s; text-align:center; margin-bottom:28px;">
+      <span class="hero-eyebrow-pill">· AI-GTM Studio · Signal-Based Acquisition ·</span>
     </div>
 
     <div class="hero-headline text-hero" data-reveal style="--delay:0.1s">
-      Decisores B2B na sua agenda em <span class="accent">15 dias</span>.
+      Decisores B2B na sua inbox em <span class="accent">7 dias</span>.
     </div>
 
     <div class="hero-negation" data-reveal style="--delay:0.2s">
@@ -1369,7 +1754,7 @@
       </div>
       <div class="hero-metric-sep"></div>
       <div class="hero-metric-item">
-        <span class="text-metric-lg" style="color:var(--accent)">D+15</span>
+        <span class="text-metric-lg" style="color:var(--accent)">D+7</span>
         <span class="text-metric-label">go-live garantido</span>
       </div>
     </div>
@@ -1482,16 +1867,21 @@
 <section id="solucao">
   <div class="container">
 
-    <div class="sec-header-left" data-reveal>
-      <span class="text-eyebrow">Pipeline OS™ — A Máquina de Aquisição B2B da TRA</span>
-      <h2 class="text-display-lg" style="margin-top:16px; max-width:680px;">
-        Você não vai contratar<br>
-        um serviço. Você vai<br>
-        ligar <span class="solution-underline">uma máquina</span>.
-      </h2>
-      <p class="solution-intro">
-        Pipeline OS™ é a infraestrutura de aquisição B2B que a TRA constrói, opera e otimiza para você. Orientada por sinais de intenção. Alimentada por IA. Visível em tempo real.
-      </p>
+    <div class="solucao-hero" data-reveal>
+      <div class="solucao-hero-text">
+        <span class="text-eyebrow">Pipeline OS™ — A Máquina de Aquisição B2B da TRA</span>
+        <h2 class="text-display-lg" style="margin-top:16px;">
+          Você não vai contratar<br>
+          um serviço. Você vai<br>
+          ligar <span class="solution-underline">uma máquina</span>.
+        </h2>
+        <p class="solution-intro">
+          Pipeline OS™ é a infraestrutura de aquisição B2B que a TRA constrói, opera e otimiza para você. Orientada por sinais de intenção. Alimentada por IA. Visível em tempo real.
+        </p>
+      </div>
+      <div>
+        <img src="davi-left.png" alt="Davi — TRA Pipeline OS™" class="solucao-davi-img">
+      </div>
     </div>
 
     <!-- Flow Diagram -->
@@ -1504,9 +1894,9 @@
         <div class="flow-arrow">→</div>
         <div class="flow-node" data-reveal style="--delay:0.2s">Campanha<br>Personalizada</div>
         <div class="flow-arrow">→</div>
-        <div class="flow-node" data-reveal style="--delay:0.3s">TAISA™</div>
+        <div class="flow-node" data-reveal style="--delay:0.3s">ORACLE™</div>
         <div class="flow-arrow">→</div>
-        <div class="flow-node" data-reveal style="--delay:0.4s">ORACLE™</div>
+        <div class="flow-node" data-reveal style="--delay:0.4s">TAISA™</div>
         <div class="flow-arrow">→</div>
         <div class="flow-node highlight" data-reveal style="--delay:0.5s">Reunião<br>Qualificada</div>
         <div class="flow-arrow">→</div>
@@ -1559,15 +1949,15 @@
       </div>
       <div class="cap-card" data-reveal style="--delay:0.24s">
         <div class="cap-num">04</div>
-        <div class="cap-title">TAISA™ — IA de Resposta em Tempo Real</div>
-        <p class="cap-body">TAISA™ monitora respostas em tempo real e propõe a melhor réplica para cada contexto — objeção, interesse, pedido de informação. Tempo de resposta de horas cai para minutos.</p>
-        <div class="cap-result">Zero janelas de oportunidade perdidas por lentidão</div>
-      </div>
-      <div class="cap-card" data-reveal style="--delay:0.32s">
-        <div class="cap-num">05</div>
         <div class="cap-title">ORACLE™ — Visibilidade Total do Pipeline</div>
         <p class="cap-body">ORACLE™ consolida métricas de campanha, taxa de aceite, respostas, reuniões agendadas e pipeline gerado numa interface de visibilidade total em tempo real.</p>
         <div class="cap-result">Você para de operar no escuro</div>
+      </div>
+      <div class="cap-card" data-reveal style="--delay:0.32s">
+        <div class="cap-num">05</div>
+        <div class="cap-title">TAISA™ — IA de Resposta em Tempo Real</div>
+        <p class="cap-body">TAISA™ monitora respostas em tempo real e propõe a melhor réplica para cada contexto — objeção, interesse, pedido de informação. Tempo de resposta de horas cai para minutos.</p>
+        <div class="cap-result">Zero janelas de oportunidade perdidas por lentidão</div>
       </div>
       <div class="cap-card" data-reveal style="--delay:0.4s">
         <div class="cap-num">06</div>
@@ -1618,6 +2008,12 @@
             <td class="col-tra">A partir de R$4.500</td>
           </tr>
           <tr>
+            <td>Gasto com Ferramentas</td>
+            <td>R$ 2,5k/mês</td>
+            <td>R$ 1k/mês</td>
+            <td class="col-tra">zero</td>
+          </tr>
+          <tr>
             <td>Ramp-up</td>
             <td>60–90 dias</td>
             <td>30–60 dias</td>
@@ -1664,7 +2060,7 @@
 
     <div class="notx-grid">
       <div class="notx-card" data-reveal style="--delay:0s">
-        <div class="notx-card-no">Não é cold blast.</div>
+        <div class="notx-card-no">Não é spray and pray.</div>
         <div class="notx-card-yes">É signal-based.</div>
         <p class="notx-card-body">Agências de outbound mandam mensagem para lista. A TRA identifica quem está no momento de compra e aborda no contexto certo. A diferença no resultado não é marginal — é estrutural.</p>
       </div>
@@ -1715,71 +2111,181 @@
         <div class="text-metric-label">abordagens</div>
       </div>
       <div class="proof-agg-item">
-        <div class="text-metric-lg" style="color:var(--accent)">D+15</div>
+        <div class="text-metric-lg" style="color:var(--accent)">D+7</div>
         <div class="text-metric-label">go-live</div>
       </div>
     </div>
 
-    <div class="tcard-grid">
-      <div class="tcard featured" data-reveal style="--delay:0s">
-        <div class="tcard-headline">Reuniões com decisores em 7 dias. Máquina rodou enquanto a CEO tirava férias.</div>
-        <div class="tcard-quote">Em 15 dias já conversávamos com decisores que nunca imaginamos acessar. A máquina rodou enquanto eu estava de férias — e as reuniões continuaram chegando.</div>
-        <div class="tcard-author">
-          <span>Ariane Feijó</span>
-          <span class="tcard-author-sep">·</span>
-          <span>CEO</span>
-          <span class="tcard-author-sep">·</span>
-          <span>Otimifica</span>
-        </div>
-      </div>
-      <div class="tcard" data-reveal style="--delay:0.1s">
-        <div class="tcard-headline">Heineken, Reckitt, Tigre, Allianz na agenda. Equivalente a 3 SDRs sem contratar um.</div>
-        <div class="tcard-quote">A TRA nos colocou em frente a decisores de marcas que nunca conseguiríamos acessar via rede. O resultado equivale ao trabalho de 3 SDRs — com previsibilidade que SDR nunca nos deu.</div>
-        <div class="tcard-author">
-          <span>Luciano Albuquerque</span>
-          <span class="tcard-author-sep">·</span>
-          <span>CEO</span>
-          <span class="tcard-author-sep">·</span>
-          <span>Lyga</span>
-        </div>
-      </div>
-      <div class="tcard" data-reveal style="--delay:0.2s">
-        <div class="tcard-headline">Conversas estratégicas com decisores no piloto automático.</div>
-        <div class="tcard-quote">A TRA entregou o que toda empresa B2B precisa e raramente tem: conversas estratégicas com decisores certos, sem forçar venda, no piloto automático.</div>
-        <div class="tcard-author">
-          <span>Giovanni Machado</span>
-          <span class="tcard-author-sep">·</span>
-          <span>CEO</span>
-          <span class="tcard-author-sep">·</span>
-          <span>Opex</span>
-        </div>
-      </div>
-      <div class="tcard" data-reveal style="--delay:0.3s">
-        <div class="tcard-headline">Execução que parece extensão do nosso time — não fornecedor externo.</div>
-        <div class="tcard-quote">A TRA não age como fornecedor. Age como extensão do nosso time — com a mesma exigência e comprometimento que temos internamente.</div>
-        <div class="tcard-author">
-          <span>Jamerson Cunha</span>
-          <span class="tcard-author-sep">·</span>
-          <span>CEO</span>
-          <span class="tcard-author-sep">·</span>
-          <span>Facilit'Air</span>
-        </div>
-      </div>
-      <div class="tcard full" data-reveal style="--delay:0.4s">
-        <div class="tcard-quote" style="font-size:15px;">
-          Antes da TRA, outbound era esperança. Agora é sistema. Pipeline previsível e um mindset completamente diferente sobre como construir crescimento.
-        </div>
-        <div class="tcard-full-right">
-          <div class="tcard-headline" style="margin-bottom:12px; font-size:clamp(16px,1.8vw,20px);">Pipeline previsível. Mindset de outbound transformado.</div>
-          <div class="tcard-author">
-            <span>Leonardo Vieira</span>
-            <span class="tcard-author-sep">·</span>
-            <span>CEO</span>
-            <span class="tcard-author-sep">·</span>
-            <span>Carthagos</span>
+    <div class="tscroll-outer">
+
+      <!-- Column 1 — always visible -->
+      <div class="tscroll-col">
+        <div class="tscroll-track" style="animation-duration:18s">
+          <!-- set 1 -->
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"Em 7 dias já conversávamos com decisores que nunca imaginamos acessar. A máquina rodou enquanto eu estava de férias — e as reuniões continuaram chegando."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=44" alt="Ariane Feijó" loading="lazy"></div>
+              <div><div class="tscroll-name">Ariane Feijó</div><div class="tscroll-role">CEO · Otimifica</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA entregou o que toda empresa B2B precisa e raramente tem: conversas estratégicas com decisores certos, sem forçar venda, no piloto automático."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=68" alt="Giovanni Machado" loading="lazy"></div>
+              <div><div class="tscroll-name">Giovanni Machado</div><div class="tscroll-role">CEO · Opex</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"Antes da TRA, outbound era esperança. Agora é sistema. Pipeline previsível e um mindset completamente diferente sobre como construir crescimento."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=15" alt="Leonardo Vieira" loading="lazy"></div>
+              <div><div class="tscroll-name">Leonardo Vieira</div><div class="tscroll-role">CEO · Carthagos</div></div>
+            </div>
+          </div>
+          <!-- set 2 (duplicate for seamless loop) -->
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"Em 7 dias já conversávamos com decisores que nunca imaginamos acessar. A máquina rodou enquanto eu estava de férias — e as reuniões continuaram chegando."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=44" alt="Ariane Feijó" loading="lazy"></div>
+              <div><div class="tscroll-name">Ariane Feijó</div><div class="tscroll-role">CEO · Otimifica</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA entregou o que toda empresa B2B precisa e raramente tem: conversas estratégicas com decisores certos, sem forçar venda, no piloto automático."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=68" alt="Giovanni Machado" loading="lazy"></div>
+              <div><div class="tscroll-name">Giovanni Machado</div><div class="tscroll-role">CEO · Opex</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"Antes da TRA, outbound era esperança. Agora é sistema. Pipeline previsível e um mindset completamente diferente sobre como construir crescimento."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=15" alt="Leonardo Vieira" loading="lazy"></div>
+              <div><div class="tscroll-name">Leonardo Vieira</div><div class="tscroll-role">CEO · Carthagos</div></div>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Column 2 — md+ -->
+      <div class="tscroll-col tscroll-col-2">
+        <div class="tscroll-track" style="animation-duration:22s">
+          <!-- set 1 -->
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA nos colocou em frente a decisores de marcas que nunca conseguiríamos acessar via rede. O resultado equivale ao trabalho de 3 SDRs — com previsibilidade que SDR nunca nos deu."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=52" alt="Luciano Albuquerque" loading="lazy"></div>
+              <div><div class="tscroll-name">Luciano Albuquerque</div><div class="tscroll-role">CEO · Lyga</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA não age como fornecedor. Age como extensão do nosso time — com a mesma exigência e comprometimento que temos internamente."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=11" alt="Jamerson Cunha" loading="lazy"></div>
+              <div><div class="tscroll-name">Jamerson Cunha</div><div class="tscroll-role">CEO · Facilit'Air</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"Em 7 dias já conversávamos com decisores que nunca imaginamos acessar. A máquina rodou enquanto eu estava de férias — e as reuniões continuaram chegando."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=44" alt="Ariane Feijó" loading="lazy"></div>
+              <div><div class="tscroll-name">Ariane Feijó</div><div class="tscroll-role">CEO · Otimifica</div></div>
+            </div>
+          </div>
+          <!-- set 2 -->
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA nos colocou em frente a decisores de marcas que nunca conseguiríamos acessar via rede. O resultado equivale ao trabalho de 3 SDRs — com previsibilidade que SDR nunca nos deu."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=52" alt="Luciano Albuquerque" loading="lazy"></div>
+              <div><div class="tscroll-name">Luciano Albuquerque</div><div class="tscroll-role">CEO · Lyga</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA não age como fornecedor. Age como extensão do nosso time — com a mesma exigência e comprometimento que temos internamente."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=11" alt="Jamerson Cunha" loading="lazy"></div>
+              <div><div class="tscroll-name">Jamerson Cunha</div><div class="tscroll-role">CEO · Facilit'Air</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"Em 7 dias já conversávamos com decisores que nunca imaginamos acessar. A máquina rodou enquanto eu estava de férias — e as reuniões continuaram chegando."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=44" alt="Ariane Feijó" loading="lazy"></div>
+              <div><div class="tscroll-name">Ariane Feijó</div><div class="tscroll-role">CEO · Otimifica</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3 — lg+ -->
+      <div class="tscroll-col tscroll-col-3">
+        <div class="tscroll-track" style="animation-duration:15s">
+          <!-- set 1 -->
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA entregou o que toda empresa B2B precisa e raramente tem: conversas estratégicas com decisores certos, sem forçar venda, no piloto automático."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=68" alt="Giovanni Machado" loading="lazy"></div>
+              <div><div class="tscroll-name">Giovanni Machado</div><div class="tscroll-role">CEO · Opex</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"Antes da TRA, outbound era esperança. Agora é sistema. Pipeline previsível e um mindset completamente diferente sobre como construir crescimento."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=15" alt="Leonardo Vieira" loading="lazy"></div>
+              <div><div class="tscroll-name">Leonardo Vieira</div><div class="tscroll-role">CEO · Carthagos</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA nos colocou em frente a decisores de marcas que nunca conseguiríamos acessar via rede. O resultado equivale ao trabalho de 3 SDRs — com previsibilidade que SDR nunca nos deu."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=52" alt="Luciano Albuquerque" loading="lazy"></div>
+              <div><div class="tscroll-name">Luciano Albuquerque</div><div class="tscroll-role">CEO · Lyga</div></div>
+            </div>
+          </div>
+          <!-- set 2 -->
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA entregou o que toda empresa B2B precisa e raramente tem: conversas estratégicas com decisores certos, sem forçar venda, no piloto automático."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=68" alt="Giovanni Machado" loading="lazy"></div>
+              <div><div class="tscroll-name">Giovanni Machado</div><div class="tscroll-role">CEO · Opex</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"Antes da TRA, outbound era esperança. Agora é sistema. Pipeline previsível e um mindset completamente diferente sobre como construir crescimento."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=15" alt="Leonardo Vieira" loading="lazy"></div>
+              <div><div class="tscroll-name">Leonardo Vieira</div><div class="tscroll-role">CEO · Carthagos</div></div>
+            </div>
+          </div>
+          <div class="tscroll-card">
+            <div class="tscroll-stars">★★★★★</div>
+            <div class="tscroll-text">"A TRA nos colocou em frente a decisores de marcas que nunca conseguiríamos acessar via rede. O resultado equivale ao trabalho de 3 SDRs — com previsibilidade que SDR nunca nos deu."</div>
+            <div class="tscroll-author">
+              <div class="tscroll-avatar"><img src="https://i.pravatar.cc/80?img=52" alt="Luciano Albuquerque" loading="lazy"></div>
+              <div><div class="tscroll-name">Luciano Albuquerque</div><div class="tscroll-role">CEO · Lyga</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div data-reveal>
@@ -1988,29 +2494,67 @@
   </div>
 </section>
 
+<!-- WhatsApp button -->
+<a id="whatsappBtn" href="https://wa.me/5511942946118?text=Hey%20TRA%2C%20estou%20vindo%20do%20site%20e%20quero%20instalar%20o%20TRA%20Pipeline%20OS%20na%20minha%20empresa%21" target="_blank" rel="noopener" aria-label="Contato via WhatsApp">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.345.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.711.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.413z"/>
+  </svg>
+</a>
+
+<!-- Scroll-to-top button -->
+<button id="scrollTop" aria-label="Voltar ao topo">
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 14V4M9 4L4 9M9 4L14 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
 <!-- ── FOOTER ── -->
 <footer>
   <div class="container footer-inner">
     <div class="footer-row-1">
       <div class="footer-logo">
-        <span class="footer-logo-mark">TRA</span>
-        <span class="footer-logo-sub">Pipeline OS™</span>
+        <img src="brand_assets/TRA Logo.png" alt="TRA" class="footer-logo-img">
       </div>
       <a href="https://tracquisition.com" class="footer-link" target="_blank" rel="noopener">tracquisition.com</a>
     </div>
-    <div class="footer-copy">© 2026 TRA — The Revenue Architects · Technology for Revenue Acquisition</div>
+    <div class="footer-copy">© 2026 TRA — Technology for Revenue Acquisition</div>
   </div>
 </footer>
 
 <!-- ── SCRIPTS ── -->
 <script>
-  /* Navbar scroll border */
+  /* Navbar scroll + mobile menu */
   (function () {
     var nav = document.getElementById('nav');
+    var navHam = document.getElementById('navHam');
+    var navMobile = document.getElementById('navMobile');
     if (!nav) return;
-    window.addEventListener('scroll', function () {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    }, { passive: true });
+
+    function updateScroll() {
+      var menuOpen = navMobile && navMobile.classList.contains('open');
+      nav.classList.toggle('scrolled', window.scrollY > 20 && !menuOpen);
+    }
+    window.addEventListener('scroll', updateScroll, { passive: true });
+    updateScroll();
+
+    function toggleMenu() {
+      var isOpen = !navMobile.classList.contains('open');
+      navHam.classList.toggle('open', isOpen);
+      navMobile.classList.toggle('open', isOpen);
+      navHam.setAttribute('aria-expanded', String(isOpen));
+      navMobile.setAttribute('aria-hidden', String(!isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+      updateScroll();
+    }
+
+    if (navHam) navHam.addEventListener('click', toggleMenu);
+    if (navMobile) {
+      navMobile.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          if (navMobile.classList.contains('open')) toggleMenu();
+        });
+      });
+    }
   })();
 
   /* FAQ accordion */
@@ -2051,6 +2595,18 @@
     document.addEventListener('DOMContentLoaded', revealInView);
     window.addEventListener('load', revealInView);
     window.addEventListener('scroll', revealInView, { passive: true });
+  })();
+
+  /* Scroll-to-top button */
+  (function () {
+    var btn = document.getElementById('scrollTop');
+    if (!btn) return;
+    window.addEventListener('scroll', function () {
+      btn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   })();
 </script>
 
